@@ -1,0 +1,14 @@
+{
+  "schema_version": "feature-proof-narration/v1",
+  "feature_id": "{{FEATURE_ID}}",
+  "mode": "{{MODE}}",
+  "segments": [
+    {"scene": 1, "spoken": "The current result is still unverified.", "caption": "Baseline before proof", "claim_ids": ["claim-pending"]},
+    {"scene": 2, "spoken": "This is the decision the evidence must support.", "caption": "One decision", "claim_ids": ["claim-pending"]},
+    {"scene": 3, "spoken": "The same input stays visible across the comparison.", "caption": "Same input", "claim_ids": ["claim-pending"]},
+    {"scene": 4, "spoken": "The difficult state remains visible instead of being cut away.", "caption": "Conflict stays on screen", "claim_ids": ["claim-pending"]},
+    {"scene": 5, "spoken": "The receipt must appear before this claim can ship.", "caption": "Receipt pending", "claim_ids": ["claim-pending"]},
+    {"scene": 6, "spoken": "No verdict is allowed until that receipt passes.", "caption": "Verdict pending", "claim_ids": ["claim-pending"]},
+    {"scene": 7, "spoken": "The handoff remains pending until the run can be replayed.", "caption": "Handoff pending", "claim_ids": ["claim-pending"], "visual_receipt_ref": "receipts/traces/trace-waterfall.svg"}
+  ]
+}

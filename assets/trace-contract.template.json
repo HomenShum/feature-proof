@@ -1,0 +1,29 @@
+{
+  "schema_version": "feature-proof-trace/v1",
+  "trace_name": "{{FEATURE_ID}}",
+  "required_root": "feature-action",
+  "required_spans": [
+    {"name": "feature-action", "parent": null, "kind": "chain", "when": "always"}
+  ],
+  "optional_spans": [],
+  "ordered_pairs": [],
+  "parallel_groups": [],
+  "metrics": {
+    "feature-action": {
+      "required": ["status", "latency_ms"],
+      "required_values": {"status": "ok"},
+      "when": "always"
+    }
+  },
+  "required_scores": [],
+  "must_not_capture": {
+    "keys": [
+      "authorization",
+      "access_token",
+      "document_text",
+      "email"
+    ],
+    "patterns": []
+  },
+  "limits": {"max_spans": 256, "max_receipt_bytes": 1048576, "max_latency_ms": 60000}
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "feature-proof-storyboard/v1",
+  "feature_id": "{{FEATURE_ID}}",
+  "title": "{{TITLE}}",
+  "scenes": [
+    {"scene": 1, "beat": "premise", "claim_ids": ["claim-pending"], "evidence": "Show the baseline before the feature acts."},
+    {"scene": 2, "beat": "viewer_question", "claim_ids": ["claim-pending"], "evidence": "Name the decision the viewer should answer."},
+    {"scene": 3, "beat": "comparison_axis", "claim_ids": ["claim-pending"], "evidence": "Keep the input constant while the state changes."},
+    {"scene": 4, "beat": "conflict", "claim_ids": ["claim-pending"], "evidence": "Show the constraint, wait, or refusal."},
+    {"scene": 5, "beat": "evidence", "claim_ids": ["claim-pending"], "evidence": "Show the exact receipt in the real surface."},
+    {"scene": 6, "beat": "verdict", "claim_ids": ["claim-pending"], "evidence": "State only what the receipt proves."},
+    {"scene": 7, "beat": "exit_decision", "claim_ids": ["claim-pending"], "evidence": "End with the decision and trace waterfall."}
+  ]
+}

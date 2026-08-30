@@ -1,0 +1,105 @@
+{
+  "schema_version": "feature-proof/v1",
+  "feature_id": "{{FEATURE_ID}}",
+  "title": "{{TITLE}}",
+  "business": {
+    "persona": "Name the person making a decision.",
+    "decision": "Name the decision this feature supports.",
+    "problem": "Name the current human problem.",
+    "concrete_failure": "Name what goes wrong today.",
+    "success_measure": "Name one observable success measure."
+  },
+  "source": {
+    "repository": ".",
+    "identity_status": "frozen",
+    "base_commit": "{{IMPLEMENTATION_COMMIT}}",
+    "implementation_commit": "{{IMPLEMENTATION_COMMIT}}",
+    "integrity_contract": "git-seal-main-portable/v1",
+    "implementation_paths": ["{{IMPLEMENTATION_PATH}}"]
+  },
+  "authority": {
+    "deterministic": ["Replace with deterministic authority."],
+    "model": ["Replace with model authority, or state none."],
+    "human": ["Replace with human authority."],
+    "forbidden": ["A narration claim without a passing receipt."]
+  },
+  "contracts": {
+    "inputs": [{"name": "feature input", "code_anchor": "feature-contract"}],
+    "outputs": [{"name": "feature output", "code_anchor": "feature-contract"}],
+    "code_anchors": [
+      {
+        "id": "feature-contract",
+        "path": "{{IMPLEMENTATION_PATH}}",
+        "symbol": "{{ANCHOR_SYMBOL}}"
+      }
+    ]
+  },
+  "attacks": [
+    {
+      "id": "attack-invalid-input",
+      "persona": "A user submits malformed input.",
+      "scenario": "The feature must refuse without a side effect.",
+      "expected_receipt": "receipts/tests/claim-pending.json"
+    }
+  ],
+  "verification_matrix": [
+    {"id": "scenario-happy", "category": "happy", "persona": "The primary user.", "goal": "Complete the business decision.", "behavior": "Drive the real success path.", "gate_id": "feature-scenarios", "ui_applicable": false},
+    {"id": "scenario-sad", "category": "sad", "persona": "A user with incomplete input.", "goal": "Understand what is missing.", "behavior": "Submit incomplete input and observe the honest state.", "expected_receipt": "receipts/tests/claim-pending.json", "ui_applicable": false},
+    {"id": "scenario-adversarial", "category": "adversarial", "persona": "A caller crossing an authority boundary.", "goal": "Attempt a forbidden action.", "behavior": "Verify refusal and zero forbidden side effects.", "expected_receipt": "receipts/tests/claim-pending.json", "ui_applicable": false},
+    {"id": "scenario-degraded", "category": "degraded", "persona": "A user during dependency failure.", "goal": "Receive an honest bounded recovery.", "behavior": "Force timeout or unavailability and verify status.", "expected_receipt": "receipts/tests/claim-pending.json", "ui_applicable": false},
+    {"id": "scenario-burst", "category": "burst", "persona": "An agent issuing 100 rapid retries.", "goal": "Avoid duplicate or unbounded work.", "behavior": "Run 100 immediate attempts and measure bounds.", "expected_receipt": "receipts/tests/claim-pending.json", "ui_applicable": false},
+    {"id": "scenario-sustained", "category": "sustained", "persona": "A user returning for 100 turns.", "goal": "Keep latency and state bounded.", "behavior": "Run 100 sequential turns and measure accumulation.", "expected_receipt": "receipts/tests/claim-pending.json", "ui_applicable": false},
+    {"id": "scenario-restore", "category": "restore", "persona": "A user returning after restart.", "goal": "Recover the same durable state.", "behavior": "Restart and restore by durable identity.", "expected_receipt": "receipts/tests/claim-pending.json", "ui_applicable": false}
+  ],
+  "claims": [
+    {
+      "id": "claim-pending",
+      "text": "The named feature outcome is observed in the real workflow.",
+      "receipt_type": "gate",
+      "receipt_ref": "receipts/tests/claim-pending.json",
+      "modes": ["product", "engineering"],
+      "required": true,
+      "evidence_schema": {
+        "gate_id": "identifier",
+        "command_sha256": "sha256",
+        "exit_code": {"$const": 0},
+        "observed_literal": "string"
+      },
+      "status": "pending"
+    }
+  ],
+  "trace_contract_ref": "trace-contract.json",
+  "gates": [
+    {
+      "id": "feature-scenarios",
+      "command": ["python", "-c", "import pytest; code=pytest.main(['-q']); print('FEATURE SCENARIOS PASS' if code == 0 else 'FEATURE SCENARIOS FAIL'); raise SystemExit(code)"],
+      "expected_literal": "FEATURE SCENARIOS PASS",
+      "receipt_path": "receipts/tests/feature-scenarios.json",
+      "when": "always"
+    }
+  ],
+  "capture": {
+    "ui_applicable": false,
+    "route": "server-only",
+    "viewport": {"width": 1600, "height": 900},
+    "theme": "dark",
+    "reduced_motion": true,
+    "fixture": "Replace with a stable fixture.",
+    "storyboard_ref": "storyboard.json",
+    "required_media": [],
+    "media_receipt_ref": "receipts/browser/media-receipt.json",
+    "product_forbidden_terms": [
+      "api",
+      "class",
+      "endpoint",
+      "function",
+      "http",
+      "json",
+      "langfuse",
+      "langgraph",
+      "python",
+      "typescript"
+    ]
+  },
+  "limits": {"max_packet_bytes": 67108864}
+}

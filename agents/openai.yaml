@@ -1,0 +1,4 @@
+interface:
+  display_name: "Feature Proof"
+  short_description: "Receipt-bound feature implementation and handoff"
+  default_prompt: "Use $feature-proof to take this feature from business problem to a verified, narration-safe handoff packet."
